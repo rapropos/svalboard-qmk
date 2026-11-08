@@ -422,7 +422,7 @@ else
     TOOLCHAIN ?= arm-none-eabi-
 
     # Toolchain specific Linker flags
-	TOOLCHAIN_LDFLAGS = -Wl,--no-wchar-size-warning
+    TOOLCHAIN_LDFLAGS = -Wl,--no-wchar-size-warning
 
     # Default to compiling with picolibc for ARM targets if available, which
     # is available by default on distributions based on Debian 11+.
@@ -439,8 +439,8 @@ else
         # Tell QMK that we are compiling with picolibc.
         OPT_DEFS += -DUSE_PICOLIBC
     else
-    	PLATFORM_SRC = $PLATFORM_SRC \
-                $(CHIBIOS)/os/various/newlib_bindings/syscalls.c
+        PLATFORM_SRC += $(CHIBIOS)/os/various/newlib_bindings/syscalls.c
+        TOOLCHAIN_LDFLAGS += --specs=nano.specs
     endif
     # MCU architecture flags
     MCUFLAGS = -mcpu=$(MCU) \
